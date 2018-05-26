@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>登录</title>
+</head>
+<body>
+    <form th:action="@{/checkPhone}" method="post">
+        <label id="phone">联系方式</label>
+        <input type="text" th:name="phone"/>
+        <input type="submit" value="提交">
+    </form>
+    <div>
+        <p th:if="${message} ne null" th:text="${message}"></p>
+    </div>
+
+</body>
+</html>

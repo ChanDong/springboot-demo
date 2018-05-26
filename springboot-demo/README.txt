@@ -1,0 +1,1 @@
+1.配置了关于redis的事项（RedisConfig, RedisUtil和application.properties中配置了选取redis的哪个数据库）
