@@ -15,5 +15,10 @@
         <p th:if="${message} ne null" th:text="${message}"></p>
     </div>
 
+    <form method="post" enctype="multipart/form-data" th:action="@{/userExcel}">
+        <input type="file" id="userExcel" name="userExcel"/>
+        <input type="submit" value="上传"/>
+    </form>
+
 </body>
 </html>

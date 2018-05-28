@@ -5,6 +5,8 @@ import com.example.springbootdemo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by shixi03 on 2018/5/23.
  */
@@ -16,5 +18,9 @@ public class UserService {
 
     public User getUserById(int id) {
         return userDAO.getUserById(id);
+    }
+
+    public List<User> getAllUser() {
+        return userDAO.getAllUser();
     }
 }
