@@ -1,1 +1,3 @@
-1.配置了关于redis的事项（RedisConfig, RedisUtil和application.properties中配置了选取redis的哪个数据库）
+1.配置了关于redis的事项(RedisConfig, RedisUtil和application.properties中配置了选取redis的哪个数据库)
+2.上传Excel(ExcelUtil和ExcelService,思路为先获取Excel的Sheet,然后再获取有数据的首行和尾行,注意导入的数据是首行的下一行,然后再某
+一行中再获取首列和尾列，遍历获得数据)
