@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.BoundHashOperations;
-import org.springframework.data.redis.core.BoundKeyOperations;
-import org.springframework.data.redis.core.BoundValueOperations;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.*;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Type;
@@ -234,6 +231,18 @@ public class RedisUtil {
         boundValueOps = redisTemplate.boundValueOps(keyName);
         jsonData = boundValueOps.get();
         return jsonData;
+    }
+
+    public static <T> void putForZSet(RedisTemplate<String, String> redisTemplate, T data, String key, int score) {
+        BoundZSetOperations<String, String> boundZSetOps;
+        String jsonData;
+        try {
+            boundZSetOps = redisTemplate.boundZSetOps(key);
+            jsonData = JSON.toJSONString(data, SerializerFeature.WriteNullBooleanAsFalse, SerializerFeature.WriteNullListAsEmpty, SerializerFeature.WriteNullNumberAsZero, SerializerFeature.WriteNullStringAsEmpty);
+            boundZSetOps.add(jsonData, score);
+        } catch (Exception e) {
+            logger.error(FAILURE_LOG, "putForZSet", key, null, e);
+        }
     }
 
     private static void setTimeout(BoundKeyOperations boundKeyOps, Expire expire) {
