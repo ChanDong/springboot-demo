@@ -16,9 +16,16 @@
     </div>
 
     <form method="post" enctype="multipart/form-data" th:action="@{/userExcel}">
-        <input type="file" id="userExcel" name="userExcel"/>
+        <label>选择Excel文件:<input type="file" id="userExcel" name="userExcel"/></label>
         <input type="submit" value="上传"/>
     </form>
+
+    <form method="post" enctype="multipart/form-data" th:action="@{/multifileUpload}">
+        <label>选择文件:<input type="file" name="filename"></label>
+        <input type="submit" value="上传">
+    </form>
+
+    <a th:href="@{/multifileDownLoad}">下载</a>
 
 </body>
 </html>

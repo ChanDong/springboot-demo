@@ -94,6 +94,11 @@ public class ExcelUtil {
                 excelPath = request.getSession().getServletContext().getRealPath("/") + "excels\\"
                     + cover + "." + excel.getOriginalFilename().split("\\.")[1];
 
+                File file = new File(excelPath);
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdir();
+                }
+
                 //转存文件
                 excel.transferTo(new File(excelPath));
                 readExcel(excelPath);
