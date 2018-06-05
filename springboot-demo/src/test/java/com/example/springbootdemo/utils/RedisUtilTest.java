@@ -1,5 +1,6 @@
 package com.example.springbootdemo.utils;
 
+import com.example.springbootdemo.service.redis.RedisService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class RedisUtilTest {
 
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private RedisService redisService;
 
     @Test
     public void allRedisTest() {

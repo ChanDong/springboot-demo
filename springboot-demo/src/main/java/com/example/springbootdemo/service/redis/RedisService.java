@@ -1,17 +1,16 @@
 package com.example.springbootdemo.service.redis;
 
+import com.example.springbootdemo.domain.Billboard;
 import com.example.springbootdemo.utils.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by shixi03 on 2018/5/23.
@@ -51,5 +50,24 @@ public class RedisService {
         logger.info("hash的值是:{}", hashValue);
         logger.info("hash的child的值是:{}" , result.toString());
         logger.info("hash的Map是:{}", redisMap.toString());
+    }
+
+    public List<Billboard> redisZsetPut() {
+        RedisUtil.putForZSet(redisTemplate, "a", "activity", 10);
+        RedisUtil.putForZSet(redisTemplate, "b", "activity", 50);
+        RedisUtil.putForZSet(redisTemplate, "c", "activity", 60);
+        RedisUtil.putForZSet(redisTemplate, "d", "activity", 40);
+        RedisUtil.putForZSet(redisTemplate, "e", "activity", 20);
+
+        Set<ZSetOperations.TypedTuple<String>> hashSet = RedisUtil.getForZSet(redisTemplate, "activity", 0, 100);
+
+        List<Billboard> billboards = new ArrayList<>();
+        for (ZSetOperations.TypedTuple<String> hashSetValue :hashSet) {
+            Billboard billboard = new Billboard();
+            billboard.setName(hashSetValue.getValue().replace("\"", ""));
+            billboard.setScore(String.valueOf(hashSetValue.getScore()));
+            billboards.add(billboard);
+        }
+        return billboards;
     }
 }

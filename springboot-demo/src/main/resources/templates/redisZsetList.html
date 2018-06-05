@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>userList</title>
+</head>
+<body>
+<table border="1">
+    <caption>排行榜</caption>
+    <tr>
+        <th>name</th>
+        <th>score</th>
+    </tr>
+    <tr th:each="billboard : ${billboards}">
+        <td th:text="${billboard.name}">name</td>
+        <td th:text="${billboard.score}">score</td>
+    </tr>
+</table>
+</body>
+</html>

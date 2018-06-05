@@ -241,8 +241,20 @@ public class RedisUtil {
             jsonData = JSON.toJSONString(data, SerializerFeature.WriteNullBooleanAsFalse, SerializerFeature.WriteNullListAsEmpty, SerializerFeature.WriteNullNumberAsZero, SerializerFeature.WriteNullStringAsEmpty);
             boundZSetOps.add(jsonData, score);
         } catch (Exception e) {
-            logger.error(FAILURE_LOG, "putForZSet", key, null, e);
+            logger.error(FAILURE_LOG, "putForZSet", key, "", e);
         }
+    }
+
+    public static Set<ZSetOperations.TypedTuple<String>> getForZSet(RedisTemplate<String, String> redisTemplate, String key, int min, int max) {
+        BoundZSetOperations<String, String> boundZSetOps;
+        Set<ZSetOperations.TypedTuple<String>> hashSet = new HashSet<>();
+        try {
+            boundZSetOps = redisTemplate.boundZSetOps(key);
+            hashSet = boundZSetOps.reverseRangeByScoreWithScores(min, max);
+        } catch (Exception e) {
+            logger.error(FAILURE_LOG, "getForZSet", key, "", e);
+        }
+        return hashSet;
     }
 
     private static void setTimeout(BoundKeyOperations boundKeyOps, Expire expire) {
