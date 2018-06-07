@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kaptcha</title>
+</head>
+<body>
+
+    <div>
+        <p th:if="${info} ne null" th:text="${info}"></p>
+    </div>
+
+    <div>
+        <img src="/defaultKaptcha" alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1"/>
+    </div>
+
+    <form th:action="@{/verifyDefaultKaptcha}" method="post">
+        <input type="text" name="verifyCode">
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>

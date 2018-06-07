@@ -3,3 +3,4 @@
 一行中再获取首列和尾列，遍历获得数据)
 3.实现了简单的排行榜功能，主要运用redis的zset类型(RedisUtil和RedisService)
 4.添加文件上传和下载功能，但是实现的代码比较简单
+5.添加了验证码功能(KaptchaController,KaptchaConfig,Kaptcha.html)
