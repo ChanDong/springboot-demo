@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController {
@@ -22,7 +23,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/login")
+    @RequestMapping("/springBootTest")
     public String login(Model model) {
         model.addAttribute("message", "");
         redisService.redisStringPut();
@@ -40,5 +41,11 @@ public class LoginController {
             model.addAttribute("message", "手机错误");
         }
         return "login";
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public String haha() {
+        return "haha";
     }
 }
